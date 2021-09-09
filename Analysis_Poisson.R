@@ -8,7 +8,7 @@
 # the fist column is the total number of sequences per taxon in experimental samples
 # last column is total number of mistags per taxon across all control bins
 # mistags per taxon per bin are shown in columns in between
-df <- read.csv("~/Projects/CriticalMistagNB/Dataset1.csv")
+df <- read.csv("Dataset1.csv")
 CMs <- colSums(df[,3:14]) # list of mistags per control bin
 Samples <- 42 # total number of dual-index bins
 TotalSeqs <- sum(colSums(df[,c(2,15)]))
@@ -89,7 +89,7 @@ prop.test(sum(dfLong$ExceedsThreshold), nrow(dfLong), 0.05)
 
 # now try on a second dataset
 
-df <- read.csv("~/Projects/CriticalMistagNB/Dataset2.csv")
+df <- read.csv("Dataset2.csv")
 CMs <- colSums(df[,3:9]) # list of mistags per control bin
 Samples <- 303 # total number of dual-index bins
 TotalSeqs <- sum(colSums(df[,c(2,10)]))
