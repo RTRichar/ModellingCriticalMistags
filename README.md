@@ -1,7 +1,7 @@
 # ModellingCriticalMistags
 A resource for controlling critical mistag-associated false discoveries in metagenetic data
 
-## Examples of obtaining FDR thresholds for a dataset
+## Demonstration of obtaining FDR thresholds for a dataset
 - Load functions from *CM_Functions.R* into R environment
 - Execute step by step analysis provided in *Analysis_Uniform.R* to obtain FDR thresholds for example *Dataset1.csv* and *Dataset2.csv.* 
 - For *Dataset1.csv,* column "Dat1_Exp" is the sum of sequences per taxon across all biological samples. Column "Dat1_Cont" is the sum of sequences per taxon across control samples. Columns prefixed with "NL" labels are no-library negative controls and columns prefixed with "PC" labels are positive controls.
