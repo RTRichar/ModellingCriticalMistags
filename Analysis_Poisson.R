@@ -54,12 +54,9 @@ MistagRate <- (CMs95CL*Samples)/TotalSeqs #mistags/sequences
 # Now calculate 95th percentile of max mistags expected per species
 # and 95th percentile of max mistags expetected per species per bin
 # assuming uniform distribution of mistags across bins
-
 df$Total <- (df$Dat1_Exp+df$Dat1_Cont)
 SpeiciesAndAbundances <- df[,c("Taxa","Total")]
-
 Samples <- Samples
-#SeqsPerSpeciesList <- c(0,(df$Dat1_Exp+df$Dat1_Cont))
 MistagRate <- MistagRate
 Iters <- 25000
 Lambda = f3$estimate[1]
@@ -81,7 +78,7 @@ for (i in 1:nrow(dfLong)) {
   dfLong[i,"Expected"] <- dfP[which(dfP$SeqsPerSpecies==tSeqs),"MaxMTsPerBin_Uniform"] }
 dfLong$ExceedsThreshold <- ifelse(dfLong$MTs > dfLong$Expected, 1, 0)
 sum(dfLong$ExceedsThreshold)/nrow(dfLong)
-# can do fishers exact to test if significantly greater then expected
+# can test if significantly greater then expected
 prop.test(sum(dfLong$ExceedsThreshold), nrow(dfLong), 0.05)
 
 
@@ -127,12 +124,9 @@ MistagRate <- (CMs95CL*Samples)/TotalSeqs #mistags/sequences
 # Now calculate 95th percentile of max mistags expected per species
 # and 95th percentile of max mistags expected per species per bin
 # assuming uniform distribution of mistags across bins
-
 df$Total <- (df$Dat2_Exp+df$Dat2_Cont)
 SpeiciesAndAbundances <- df[,c("Taxa","Total")]
-
 Samples <- Samples
-#SeqsPerSpeciesList <- c(0,(df$Dat2_Exp+df$Dat2_Cont))
 MistagRate <- MistagRate
 Iters <- 25000
 Lambda = f3$estimate[1]
@@ -154,6 +148,6 @@ for (i in 1:nrow(dfLong)) {
   dfLong[i,"Expected"] <- dfP[which(dfP$SeqsPerSpecies==tSeqs),"MaxMTsPerBin_Uniform"] }
 dfLong$ExceedsThreshold <- ifelse(dfLong$MTs > dfLong$Expected, 1, 0)
 sum(dfLong$ExceedsThreshold)/nrow(dfLong)
-# can do fishers exact to test if significantly greater then expected
+# can test if significantly greater then expected
 prop.test(sum(dfLong$ExceedsThreshold), nrow(dfLong), 0.05)
 
