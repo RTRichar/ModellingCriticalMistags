@@ -59,17 +59,17 @@ points(log(df$Dat1_Exp+1), log(df$Dat1_Cont+1), pch=20, cex=1, col="gray")
 points(log(dfLong$Abundance+1), log(dfLong$MTs+1), pch=20, cex=0.4)
 
 
-# at FDR<=0.05, we expect fewer then 5 in 100 points to be above light blue line
+# at FDR<=0.05, we expect about 5 in 100 points to be above FDR limit
 # is that true?
 dfLong$Expected <- NA
 for (i in 1:nrow(dfLong)) {
   tSeqs <- dfLong[i,"Abundance"]
   dfLong[i,"Expected"] <- unique(dfU[which(dfU$SeqsPerSpecies==tSeqs),"MaxMTsPerBin_Uniform"]) }
-#dfTMP <- dfLong
-dfTMP <- dfLong[which(dfLong$Abundance>=2000),]
+#dfTMP <- dfLong # with full dataset
+dfTMP <- dfLong[which(dfLong$Abundance>=2000),] # with abundant taxa, because rare taxa are unlikely to produce mistag false positives
 dfTMP$ExceedsThreshold <- ifelse(dfTMP$MTs > dfTMP$Expected, 1, 0)
 sum(dfTMP$ExceedsThreshold)/nrow(dfTMP)
-# can do fishers exact to test if significantly greater then expected
+# can test if significantly greater then expected
 prop.test(sum(dfTMP$ExceedsThreshold), nrow(dfTMP), 0.05)
 
 ####################################################################################################
@@ -117,7 +117,7 @@ lines(log(dfU$SeqsPerSpecies+1), log(dfU$MaxMTsPerBin_Uniform+1), col="lightblue
 points(log(df$Dat2_Exp+1), log(df$Dat2_Cont+1), pch=20, cex=1, col="gray")
 points(log(dfLong$Abundance+1), log(dfLong$MTs+1), pch=20, cex=0.4)
 
-# at FDR<=0.05, we expect fewer then 5 in 100 points to be above light blue line
+# at FDR<=0.05, we expect fewer then 5 in 100 points to be above FDR limit
 # is that true?
 dfLong$Expected <- NA
 for (i in 1:nrow(dfLong)) {
@@ -127,5 +127,5 @@ for (i in 1:nrow(dfLong)) {
 dfTMP <- dfLong[which(dfLong$Abundance>=2000),]
 dfTMP$ExceedsThreshold <- ifelse(dfTMP$MTs > dfTMP$Expected, 1, 0)
 sum(dfTMP$ExceedsThreshold)/nrow(dfTMP)
-# can do fishers exact to test if significantly greater then expected
+# can test if significantly greater then expected
 prop.test(sum(dfTMP$ExceedsThreshold), nrow(dfTMP), 0.05)
