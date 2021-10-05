@@ -1,5 +1,8 @@
+# starting with Dataset 1
+
 #####################################################################################################
-# Try it out on real data 
+# First, we need to estimate the mistagging rate or our sequencing run
+#####################################################################################################
 
 # load the data
 # here, "NL" and "PC" in column names indicate 'no library negative' and 'positive control,' respectively
@@ -38,15 +41,18 @@ CMs95CL <- mean(CMs) + qt(0.975, df = length(CMs)-1)*(sd(CMs)/length(CMs)^(1/2))
 MistagRate <- (CMs95CL*Samples)/TotalSeqs #mistags/sequences
 
 
-###############################################################################################
-# Now calculate 95th percentile of max mistags expected per species
+#####################################################################################################
+# No we can calculate 0.05 FDR thresholds assuming uniform distribution
+#####################################################################################################
+
+# Use function from CM_functions.R to calculate 95th percentile of max mistags expected per species
 # and 95th percentile of max mistags expetected per species per bin
 # assuming uniform distribution of mistags across bins
-df$Total <- (df$Dat1_Exp+df$Dat1_Cont)
-SpeiciesAndAbundances <- df[,c("Taxa","Total")]
-Samples <- Samples
-MistagRate <- MistagRate
-Iters <- 25000
+df$Total <- (df$Dat1_Exp+df$Dat1_Cont)            # calculate total sequences per taxon
+SpeiciesAndAbundances <- df[,c("Taxa","Total")]   # make datafreme of species and abundances
+Samples <- Samples                                # specify total number of dual-index bins in study (i.e. number of samples including controls) 
+MistagRate <- MistagRate                          # specify mistagging rate that you calculated above
+Iters <- 25000                                    # specify number of simulations you want to run to calculate upper 95th percentile of max mistags per dual-index bin
 
 # use MaxMistagsPerBinU() function from CM_Functions.R
 dfU <- MaxMistagsPerBinU(Samples,SpeiciesAndAbundances,MistagRate,Iters)
@@ -72,10 +78,13 @@ sum(dfTMP$ExceedsThreshold)/nrow(dfTMP)
 # can test if significantly greater then expected
 prop.test(sum(dfTMP$ExceedsThreshold), nrow(dfTMP), 0.05)
 
+
 ####################################################################################################
 ####################################################################################################
 ####################################################################################################
-# now try on a second dataset
+# now run the same process on dataset 2
+####################################################################################################
+
 df <- read.csv("Dataset2.csv")
 CMs <- colSums(df[3:9]) # list of mistags per control bin
 Samples <- 303 # total number of dual-index bins
@@ -98,7 +107,7 @@ MistagRate <- (CMs95CL*Samples)/TotalSeqs #mistags/sequences
 
 
 ###############################################################################################
-# Now calculate 95th percentile of max mistags expected per species
+# calculate 95th percentile of max mistags expected per species
 # and 95th percentile of max mistags expected per species per bin
 # assuming uniform distribution of mistags across bins
 df$Total <- (df$Dat2_Exp+df$Dat2_Cont)
