@@ -1,8 +1,8 @@
 library(purrr)
 
 ##############################################################################################
-# Make functions which calculates 95th percentile of expected mistags per species
-# AND 95th percentile of mistags per dual-index bin
+# Make functions which calculate 95th percentile of expected mistags per taxon
+# AND 95th percentile of mistags per dual-index bin per taxon
 
 # one function assuming uniform partitioning of mistags across dual-index bins
 MaxMistagsPerBinU <- function(Samples, SpeiciesAndAbundances, MistagRate, iters) {
