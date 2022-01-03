@@ -2,7 +2,7 @@
 # Try it out on a simulated data set
 
 # load the data
-df <- read.csv("~/Projects/CriticalMistagNB/Resubmission/SimulatedDataset.csv",row.names = 1)
+df <- read.csv("SimulatedDataset.csv",row.names = 1)
 
 CMs <- colSums(df[,31:40]) # list of mistags per control bin
 Samples <- 40 # total number of dual-index bins (experimental samples plus control samples)
