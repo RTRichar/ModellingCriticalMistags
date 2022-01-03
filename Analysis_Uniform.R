@@ -1,5 +1,5 @@
 #####################################################################################################
-# Try it out on a simulate data set
+# Try it out on a simulated data set
 
 # load the data
 df <- read.csv("~/Projects/CriticalMistagNB/Resubmission/SimulatedDataset.csv",row.names = 1)
