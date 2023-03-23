@@ -8,4 +8,4 @@ A resource for controlling critical mistag-associated false discoveries in metag
   -  A bootstrapped Kolmogorov–Smirnov test can be used to test whether data meet this assumption
 
 ## Citation and further information
-https://doi.org/10.1111/2041-210X.13838
+Richardson, RT. (2022) Controlling critical mistag-associated false discoveries in metagenetic data. Methods in Ecology and Evolution, 13: 938-944. https://doi.org/10.1111/2041-210X.13838
